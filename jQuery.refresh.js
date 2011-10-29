@@ -10,6 +10,7 @@
 		cookieName: 'refreshify',
 		refreshLocation: '',
 		textCountdown: 'Time till next refresh:',
+		textPaused: 'Paused',
 		textDisabled: 'Refresh disabled',
 		linkDisable: 'Disable',
 		linkEnable: 'Enable',
@@ -79,10 +80,12 @@
 				privateMethods.doTimeout();
 				properties.$linkPause.text( settings.linkPause );
 				properties.$timer.removeClass( 'paused' );
+				properties.$timerText.text( settings.textCountdown );
 			} else {
 				privateMethods.stopTimeout();
 				properties.$linkPause.text( settings.linkPlay );
 				properties.$timer.addClass( 'paused' );
+				properties.$timerText.text( settings.textPaused );
 			}
 
 			properties.isPaused = ! properties.isPaused;
@@ -135,15 +138,12 @@
 				privateMethods.doCountdown();
 
 			properties.timeout = setTimeout( privateMethods.doTimeout, ( settings.interval * 1000 ) ); // interval is in seconds
-
-			console.log( properties.timeRemaining );
-
 			properties.$timerCount.text( privateMethods.getMinuteStamp( properties.timeRemaining ) );
-			console.log( properties.$timerCount, properties.$timerCount.text() );
 			properties.timeRemaining -= settings.interval;
 		},
 		stopTimeout: function() {
 			clearTimeout( properties.timeout );
+			properties.timeRemaining = settings.time;
 		},
 		doCountdown: function() {
 			// change class

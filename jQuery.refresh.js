@@ -6,7 +6,6 @@
 	var settings = {
 		time: 60,
 		interval: 1,
-		countdownCheckpoint: 10,
 		cookieName: 'refreshify',
 		refreshLocation: '',
 		textCountdown: 'Time till next refresh:',
@@ -87,7 +86,6 @@
 				properties.$timer.addClass( 'paused' );
 				properties.$timerText.text( settings.textPaused );
 			}
-
 			properties.isPaused = ! properties.isPaused;
 		},
 		play: function() {
@@ -132,11 +130,11 @@
 
 	var privateMethods = {
 		doTimeout: function() {
-			if( properties.timeRemaining <= 0 )
+			if( properties.timeRemaining <= 0 ) {
 				publicMethods.doRefresh();
-			else if( properties.timeRemaining <= settings.countdownCheckpoint )
-				privateMethods.doCountdown();
-
+				return;
+			}
+			
 			properties.timeout = setTimeout( privateMethods.doTimeout, ( settings.interval * 1000 ) ); // interval is in seconds
 			properties.$timerCount.text( privateMethods.getMinuteStamp( properties.timeRemaining ) );
 			properties.timeRemaining -= settings.interval;
@@ -144,9 +142,6 @@
 		stopTimeout: function() {
 			clearTimeout( properties.timeout );
 			properties.timeRemaining = settings.time;
-		},
-		doCountdown: function() {
-			// change class
 		},
 		// http://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds/3733257#3733257
 		getMinuteStamp: function( time ) {

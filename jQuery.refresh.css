@@ -4,7 +4,7 @@
 	text-align: center;
 	padding: 5px 10px;
 
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	right: 0;
 
@@ -13,7 +13,6 @@
 	border-top-left-radius: 5px;
 	
 	-webkit-user-select: none;
-	user-select: none;
 }
 	.refresh-timer.flip {
 		left: 0;

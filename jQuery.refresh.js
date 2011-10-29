@@ -103,6 +103,7 @@
 
 				// and cancel countdown
 				privateMethods.stopTimeout();
+				properties.timeRemaining = settings.time;
 			} else {
 				// delete cookie
 				privateMethods.setCookie( settings.cookieName, '', -1 );
@@ -141,7 +142,6 @@
 		},
 		stopTimeout: function() {
 			clearTimeout( properties.timeout );
-			properties.timeRemaining = settings.time;
 		},
 		// http://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds/3733257#3733257
 		getMinuteStamp: function( time ) {
